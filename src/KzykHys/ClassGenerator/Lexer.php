@@ -21,6 +21,7 @@ class Lexer
     const TOKEN_WTSP = 'T_WHITESPACE';
     const TOKEN_CMNT = 'T_COMMENT';
     const TOKEN_NODE = 'T_NODE';
+    const TOKEN_IMPR = 'T_OPERATOR_IMPORT';
     const TOKEN_EXTD = 'T_OPERATOR_EXTENDS';
     const TOKEN_IMPL = 'T_OPERATOR_IMPLEMENTS';
     const TOKEN_PUBL = 'T_OPERATOR_PUBLIC';
@@ -54,6 +55,7 @@ class Lexer
             self::TOKEN_CMNT => '/^(>.*)$/',
             self::TOKEN_EXTD => '/^(<)[^<]/',
             self::TOKEN_IMPL => '/^(<<)/',
+            self::TOKEN_IMPR => '/^(~.*)$/',
             self::TOKEN_PUBL => '/^(\+)/',
             self::TOKEN_PROT => '/^(#)/',
             self::TOKEN_PRIV => '/^(-)/',

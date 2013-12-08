@@ -18,6 +18,7 @@ class ClassBuilder
     private $class;
     private $extends = null;
     private $interfaces;
+    private $imports;
     private $docblock;
     private $properties;
     private $methods;
@@ -28,6 +29,7 @@ class ClassBuilder
     public function __construct()
     {
         $this->interfaces = array();
+        $this->imports = array();
         $this->properties = array();
         $this->methods = array();
     }
@@ -70,6 +72,16 @@ class ClassBuilder
     public function getInterfaces()
     {
         return $this->interfaces;
+    }
+
+    public function addImports($imports)
+    {
+        $this->imports[] = $imports;
+    }
+
+    public function getImports()
+    {
+        return $this->imports;
     }
 
     public function setDocblock($docblock)

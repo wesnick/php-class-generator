@@ -14,7 +14,8 @@ class TokenParserTest extends \PHPUnit_Framework_TestCase
     {
         $lexer = new Lexer();
         $stream = $lexer->tokenize(
-            /* line01: */ " ClassName < BaseClass << Traversable > The Test Class\n" .
+            /* line00: */ " ClassName < BaseClass << Traversable > The Test Class\n" .
+            /* line01: */ "~ ImportClass as IC\n" .
             /* line02: */ "> Comment \n" .
             /* line03: */ "+ prop1:integer[set get is bind] > The property 1\n" .
             /* line04: */ "# prop2[set get] > The property 2\n" .

@@ -19,7 +19,8 @@ class LexerTest extends \PHPUnit_Framework_TestCase
     {
         $lexer = new Lexer();
         $stream = $lexer->tokenize(
-            /* line01: */ "\\Node\\Node < Node\\Node << Node \\Node\\Node\\Node > COMMENT\n" .
+            /* line00: */ "\\Node\\Node < Node\\Node << Node \\Node\\Node\\Node > COMMENT\n" .
+            /* line01: */ "~ IMPORT \n" .
             /* line02: */ "> TOKEN INSIDE COMMENT < << : () [] \n" .
             /* line03: */ "+ PUBLIC:TYPE[set get is bind] > COMMENT\n" .
             /* line04: */ "# PROTECTED[set get] > COMMENT\n" .
@@ -33,10 +34,13 @@ class LexerTest extends \PHPUnit_Framework_TestCase
 
         $className = 'KzykHys\\ClassGenerator\\Token\\Token';
         $tokenList = array(
-            1 => array(
+            0 => array(
                 Lexer::TOKEN_NODE, Lexer::TOKEN_WTSP, Lexer::TOKEN_EXTD, Lexer::TOKEN_WTSP, Lexer::TOKEN_NODE,
                 Lexer::TOKEN_WTSP, Lexer::TOKEN_IMPL, Lexer::TOKEN_WTSP, Lexer::TOKEN_NODE, Lexer::TOKEN_WTSP,
                 Lexer::TOKEN_NODE, Lexer::TOKEN_WTSP, Lexer::TOKEN_CMNT, Lexer::TOKEN_EOL
+            ),
+            1 => array(
+                Lexer::TOKEN_IMPR, Lexer::TOKEN_EOL
             ),
             2 => array(
                 Lexer::TOKEN_CMNT, Lexer::TOKEN_EOL

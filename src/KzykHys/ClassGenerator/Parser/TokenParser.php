@@ -24,6 +24,7 @@ class TokenParser
     const NODE_CLASS              = 'N_CLASS';
     const NODE_EXTENDS            = 'N_EXTENDS';
     const NODE_IMPLEMENTS         = 'N_IMPLEMENTS';
+    const NODE_IMPORTS            = 'N_IMPORTS';
     const NODE_CLASS_COMMENT      = 'N_CLASS_COMMENT';
     const NODE_PUBLIC_PROPERTY    = 'N_PUBLIC_PROPERTY';
     const NODE_PROTECTED_PROPERTY = 'N_PROTECTED_PROPERTY';
@@ -116,6 +117,14 @@ class TokenParser
             while (!$stream->is(Lexer::TOKEN_EOL)) {
                 if ($stream->is(Lexer::TOKEN_NODE)) {
                     $this->nodes[] = new Node(self::NODE_IMPLEMENTS, $stream->current()->getValue());
+                }
+                $stream->next();
+            }
+        }
+        if ($this->skip($stream)->is(Lexer::TOKEN_IMPR)) {
+            while (!$stream->is(Lexer::TOKEN_EOL)) {
+                if ($stream->is(Lexer::TOKEN_IMPR)) {
+                    $this->nodes[] = new Node(self::NODE_IMPORTS, $stream->current()->getValue());
                 }
                 $stream->next();
             }

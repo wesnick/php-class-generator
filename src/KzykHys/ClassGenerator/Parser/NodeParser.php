@@ -81,6 +81,10 @@ class NodeParser
             $builder->addInterface($stream->current()->getValue());
             $stream->next();
         }
+        while ($stream->is(TokenParser::NODE_IMPORTS)) {
+            $builder->addImports($stream->current()->getValue());
+            $stream->next();
+        }
         while ($stream->is(TokenParser::NODE_CLASS_COMMENT)) {
             $docblock[] = $stream->current()->getValue();
             $stream->next();

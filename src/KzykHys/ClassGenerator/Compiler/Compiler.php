@@ -72,6 +72,12 @@ class Compiler
             $writer->writeLine();
         }
 
+        $imports = $builder->getImports();
+        foreach ($imports as $import) {
+            $writer->writeF('use %s;', trim(ltrim($import, '~')));
+        }
+        $writer->writeLine();
+
         $docblock = $builder->getDocblock();
         if ($docblock) {
             $writer->writeLine('/**');
