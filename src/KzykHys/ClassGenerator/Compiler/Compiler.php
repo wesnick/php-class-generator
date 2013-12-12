@@ -74,7 +74,7 @@ class Compiler
 
         $imports = $builder->getImports();
         foreach ($imports as $import) {
-            $writer->writeF('use %s;', trim(ltrim($import, '~')));
+            $writer->writeLineF('use %s;', trim(ltrim($import, '~')));
         }
         $writer->writeLine();
 
