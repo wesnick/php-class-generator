@@ -111,10 +111,10 @@ class Compiler
                     $implements[] = $interface['fqcn'];
                 }
             }
-            $writer->write(implode(', ', $implements));
+            $writer->writeLine(implode(', ', $implements));
         }
 
-        $writer->writeLine(' {');
+        $writer->writeLine('{');
         $writer->writeLine();
     }
 
