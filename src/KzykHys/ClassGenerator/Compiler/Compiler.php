@@ -151,8 +151,12 @@ class Compiler
             $writer->indent()
                 ->write($property->getVisibility())
                 ->write(' ')
-                ->writeLine('$'.$property->getName().';')
-                ->writeLine();
+                ->write('$'.$property->getName());
+
+            if ($property->getDefault()) {
+                $writer->write(' = ' . $property->getDefault());
+            }
+            $writer->writeLine(';');
         }
 
         $writer->writeLine();

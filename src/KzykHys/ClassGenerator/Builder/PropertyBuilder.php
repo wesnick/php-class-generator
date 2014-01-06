@@ -21,6 +21,7 @@ class PropertyBuilder
     private $getters;
     private $setters;
     private $comments;
+    private $default;
 
     private $accessorDefaults = array(
         'getter' => array('get', 'is'),
@@ -154,6 +155,26 @@ class PropertyBuilder
             throw new \InvalidArgumentException(sprintf('Unexpected property accessor "%s" available accessors are [get,is,bind,set]', $accessor));
         }
 
+    }
+
+    /**
+     * Sets Default Value for a Property
+     *
+     * @param string $default
+     */
+    public function setDefault($default)
+    {
+        $this->default = $default;
+    }
+
+    /**
+     * Gets Default Value for a Property
+     *
+     * @return string
+     */
+    public function getDefault()
+    {
+        return $this->default;
     }
 
 }
