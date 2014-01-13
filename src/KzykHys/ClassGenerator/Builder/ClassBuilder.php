@@ -106,6 +106,22 @@ class ClassBuilder
         return $this->constants;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getConstantMaxLength()
+    {
+        $length = 0;
+
+        foreach ($this->constants as $key => $value) {
+            $length = (strlen($key) > $length) ? strlen($key) : $length;
+        }
+
+        return $length;
+    }
+
+
+
     public function addProperty(PropertyBuilder $builder)
     {
         $this->properties[] = $builder;

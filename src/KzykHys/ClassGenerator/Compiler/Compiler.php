@@ -132,10 +132,11 @@ class Compiler
             $writer->indent()
                 ->write('const')
                 ->write(' ')
-                ->write($constant)
-                ->write(' = ')
+                ->write(str_replace("'", "\'", $constant))
+                ->write(str_repeat(" ", $builder->getConstantMaxLength() - strlen($constant) + 5))
+                ->write("= '")
                 ->write($value)
-                ->writeLine(';')
+                ->writeLine("';")
             ;
 
         }
