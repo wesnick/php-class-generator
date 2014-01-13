@@ -20,6 +20,7 @@ class ClassBuilder
     private $interfaces;
     private $imports;
     private $docblock;
+    private $constants;
     private $properties;
     private $methods;
 
@@ -30,6 +31,7 @@ class ClassBuilder
     {
         $this->interfaces = array();
         $this->imports = array();
+        $this->constants = array();
         $this->properties = array();
         $this->methods = array();
     }
@@ -92,6 +94,16 @@ class ClassBuilder
     public function getDocblock()
     {
         return $this->docblock;
+    }
+
+    public function addConstant($key, $value)
+    {
+        $this->constants[$key] = $value;
+    }
+
+    public function getConstants()
+    {
+        return $this->constants;
     }
 
     public function addProperty(PropertyBuilder $builder)

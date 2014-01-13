@@ -48,6 +48,7 @@ class Compiler
         $writer->writeLine();
 
         $this->compileClassDefinition($builder, $writer);
+        $this->compileConstantDefinitions($builder, $writer);
         $this->compilePropertyDefinitions($builder, $writer);
         $this->compileMethodDefinitions($builder, $writer);
 
@@ -116,6 +117,29 @@ class Compiler
 
         $writer->writeLine();
         $writer->writeLine('{');
+        $writer->writeLine();
+    }
+
+    /**
+     * Compiles constant definition
+     *
+     * @param ClassBuilder $builder
+     * @param StreamWriter $writer
+     */
+    protected function compileConstantDefinitions(ClassBuilder $builder, StreamWriter $writer)
+    {
+        foreach ($builder->getConstants() as $constant => $value) {
+            $writer->indent()
+                ->write('const')
+                ->write(' ')
+                ->write($constant)
+                ->write(' = ')
+                ->write($value)
+                ->writeLine(';')
+            ;
+
+        }
+
         $writer->writeLine();
     }
 
