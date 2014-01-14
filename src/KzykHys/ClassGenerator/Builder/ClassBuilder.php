@@ -98,6 +98,9 @@ class ClassBuilder
 
     public function addConstant($key, $value)
     {
+        if ( ! preg_match("~^[a-zA-Z_]{1}[a-zA-Z0-9_]{0,}$~", $key)) {
+            throw new \InvalidArgumentException(sprintf("%s has an invalid constant character.", $key));
+        }
         $this->constants[$key] = $value;
     }
 
