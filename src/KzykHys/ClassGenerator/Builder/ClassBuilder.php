@@ -142,6 +142,37 @@ class ClassBuilder
 
     public function getMethods()
     {
+        // Add property getters and setters
+        /** @var $property PropertyBuilder */
+        foreach ($this->properties as $property) {
+
+            foreach ($property->getAccessors() as $access) {
+                $methodBuilder = new MethodBuilder();
+                $name = $access . ucfirst($property->getName());
+                $methodBuilder->setName($name);
+                $methodBuilder->setVisibility('public');
+
+                if ('get' === $access) {
+                    $methodBuilder->setType($property->getType());
+                    $setterBody = sprintf('return $this->%s;', $property->getName());
+                    $methodBuilder->setBody($setterBody);
+                }
+
+                if ('set' === $access) {
+                    $methodBuilder->addArgument(array($property->getName(), $property->getType()));
+                    $setter = sprintf('$this->%s = $%s;', $property->getName(), $property->getName());
+                    $setterBody = <<<EOF
+$setter
+        return \$this;
+EOF;
+                    $methodBuilder->setBody($setterBody);
+                    $methodBuilder->setType($this->getClass());
+                }
+
+                $this->methods[] = $methodBuilder;
+            }
+        }
+
         return $this->methods;
     }
 

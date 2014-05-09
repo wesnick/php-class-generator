@@ -20,6 +20,7 @@ class MethodBuilder
     private $type;
     private $arguments;
     private $comments;
+    private $body;
 
     /**
      * Constructor
@@ -128,5 +129,25 @@ class MethodBuilder
     {
         return $this->comments;
     }
+
+    /**
+     * @param mixed $body
+     *
+     * @return MethodBuilder
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
 
 }

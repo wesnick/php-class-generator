@@ -240,7 +240,7 @@ class Compiler
 
             $args = array();
             foreach ($arguments as $argument) {
-                $type = $this->getType($argument[1]);
+                $type = $this->getType($builder->getClass(), $argument[1]);
                 $item = '';
                 if ($type['hint']) {
                     $item .= $type['name'] . ' ';
@@ -255,7 +255,7 @@ class Compiler
 
             $writer->writeLine(')')
                 ->indent()->writeLine('{')
-                ->indent()->indent()->writeLine()
+                ->indent()->indent()->writeLine($method->getBody())
                 ->indent()->writeLine('}')->writeLine();
         }
     }
@@ -285,13 +285,14 @@ class Compiler
     /**
      * Normalize PHP type
      *
+     * @param string $className
      * @param string $type PHP type
      *
      * @return array An array includes key below [name, hint]
      */
-    public function getType($type)
+    public function getType($className, $type)
     {
-        $aliases = array(
+         $aliases = array(
             'int'    => 'integer',
             'bool'   => 'boolean',
             'double' => 'float',
@@ -306,8 +307,16 @@ class Compiler
             $type = $aliases[$type];
         }
 
-        if (!in_array($type, $default)) {
+        if (!in_array($type, $default) && strpos($type, 'array<') === false) {
             $typeHintEnabled = true;
+
+            // If Type is same namespace as class, remove namespace
+            $class = $this->parseClassName($className);
+            $methodType = $this->parseClassName($type);
+
+            if ($methodType['namespace'] === $class['namespace']) {
+                $type = $methodType['classname'];
+            }
         }
 
         return array(

@@ -177,4 +177,13 @@ class PropertyBuilder
         return $this->default;
     }
 
+    /**
+     * @return array
+     */
+    public function getAccessors()
+    {
+        return array_merge($this->getters, $this->setters);
+    }
+
+
 }
