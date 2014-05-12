@@ -83,7 +83,7 @@ class ClassBuilder
 
     public function getImports()
     {
-        return $this->imports;
+        return array_unique($this->imports);
     }
 
     public function setDocblock($docblock)
