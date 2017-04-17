@@ -1,20 +1,18 @@
 <?php
 /**
- * This software is licensed under MIT License
+ * This software is licensed under MIT License.
  *
  * Copyright (c) 2012, Kazuyuki Hayashi
  */
-
 namespace KzykHys\ClassGenerator\Builder;
 
 /**
- * Represents a PHP class
+ * Represents a PHP class.
  *
  * @author Kazuyuki Hayashi <hayashi@valnur.net>
  */
 class ClassBuilder
 {
-
     private $class;
     private $extends = null;
     private $interfaces;
@@ -25,19 +23,19 @@ class ClassBuilder
     private $methods;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
-        $this->interfaces = array();
-        $this->imports = array();
-        $this->constants = array();
-        $this->properties = array();
-        $this->methods = array();
+        $this->interfaces = [];
+        $this->imports    = [];
+        $this->constants  = [];
+        $this->properties = [];
+        $this->methods    = [];
     }
 
     /**
-     * Sets class name
+     * Sets class name.
      *
      * @param string $class
      */
@@ -47,7 +45,7 @@ class ClassBuilder
     }
 
     /**
-     * Gets class name
+     * Gets class name.
      *
      * @return string
      */
@@ -98,8 +96,8 @@ class ClassBuilder
 
     public function addConstant($key, $value)
     {
-        if ( ! preg_match("~^[a-zA-Z_]{1}[a-zA-Z0-9_]{0,}$~", $key)) {
-            throw new \InvalidArgumentException(sprintf("%s has an invalid constant character.", $key));
+        if (!preg_match('~^[a-zA-Z_]{1}[a-zA-Z0-9_]{0,}$~', $key)) {
+            throw new \InvalidArgumentException(sprintf('%s has an invalid constant character.', $key));
         }
         $this->constants[$key] = $value;
     }
@@ -123,8 +121,6 @@ class ClassBuilder
         return $length;
     }
 
-
-
     public function addProperty(PropertyBuilder $builder)
     {
         $this->properties[] = $builder;
@@ -145,10 +141,9 @@ class ClassBuilder
         // Add property getters and setters
         /** @var $property PropertyBuilder */
         foreach ($this->properties as $property) {
-
             foreach ($property->getAccessors() as $access) {
                 $methodBuilder = new MethodBuilder();
-                $name = $access . ucfirst($property->getName());
+                $name          = $access.ucfirst($property->getName());
                 $methodBuilder->setName($name);
                 $methodBuilder->setVisibility('public');
 
@@ -159,8 +154,8 @@ class ClassBuilder
                 }
 
                 if ('set' === $access) {
-                    $methodBuilder->addArgument(array($property->getName(), $property->getType()));
-                    $setter = sprintf('$this->%s = $%s;', $property->getName(), $property->getName());
+                    $methodBuilder->addArgument([$property->getName(), $property->getType()]);
+                    $setter     = sprintf('$this->%s = $%s;', $property->getName(), $property->getName());
                     $setterBody = <<<EOF
 $setter
         return \$this;
@@ -175,5 +170,4 @@ EOF;
 
         return $this->methods;
     }
-
 }

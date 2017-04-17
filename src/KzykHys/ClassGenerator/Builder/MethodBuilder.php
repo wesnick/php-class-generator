@@ -1,20 +1,18 @@
 <?php
 /**
- * This software is licensed under MIT License
+ * This software is licensed under MIT License.
  *
  * Copyright (c) 2012, Kazuyuki Hayashi
  */
-
 namespace KzykHys\ClassGenerator\Builder;
 
 /**
- * Represents a method
+ * Represents a method.
  *
  * @author Kazuyuki Hayashi <hayashi@valnur.net>
  */
 class MethodBuilder
 {
-
     private $name;
     private $visibility;
     private $type;
@@ -23,15 +21,15 @@ class MethodBuilder
     private $body;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
-        $this->arguments = array();
+        $this->arguments = [];
     }
 
     /**
-     * Sets name
+     * Sets name.
      *
      * @param string $name
      */
@@ -41,7 +39,7 @@ class MethodBuilder
     }
 
     /**
-     * Gets name
+     * Gets name.
      *
      * @return string
      */
@@ -51,7 +49,7 @@ class MethodBuilder
     }
 
     /**
-     * Sets visibility
+     * Sets visibility.
      *
      * @param string $visibility
      */
@@ -61,7 +59,7 @@ class MethodBuilder
     }
 
     /**
-     * Gets visibility
+     * Gets visibility.
      *
      * @return string
      */
@@ -71,7 +69,7 @@ class MethodBuilder
     }
 
     /**
-     * Sets type
+     * Sets type.
      *
      * @param string $type
      */
@@ -81,7 +79,7 @@ class MethodBuilder
     }
 
     /**
-     * Gets type
+     * Gets type.
      *
      * @return string
      */
@@ -91,7 +89,7 @@ class MethodBuilder
     }
 
     /**
-     * Adds an argument
+     * Adds an argument.
      *
      * @param array $argument
      */
@@ -101,7 +99,7 @@ class MethodBuilder
     }
 
     /**
-     * Gets arguments
+     * Gets arguments.
      *
      * @return array
      */
@@ -111,7 +109,7 @@ class MethodBuilder
     }
 
     /**
-     * Sets comments
+     * Sets comments.
      *
      * @param array $comments
      */
@@ -121,7 +119,7 @@ class MethodBuilder
     }
 
     /**
-     * Gets comments
+     * Gets comments.
      *
      * @return array
      */
@@ -138,6 +136,7 @@ class MethodBuilder
     public function setBody($body)
     {
         $this->body = $body;
+
         return $this;
     }
 
@@ -148,6 +147,4 @@ class MethodBuilder
     {
         return $this->body;
     }
-
-
 }

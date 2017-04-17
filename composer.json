@@ -1,25 +1,22 @@
 {
-    "name": "kzykhys/php-class-generator",
+    "name": "wesnick/php-class-generator",
     "type": "application",
-    "description": "Generate PSR compliant classes from plain text document",
+    "description": "Generate PSR compliant classes",
     "license": "MIT",
     "authors": [
         {
             "name": "Kazuyuki Hayashi",
             "email": "hayashi@valnur.net"
+        },
+        {
+            "name": "Wesley O. Nichols",
+            "email": "spanishwes@gmail.com"
         }
     ],
     "require": {
-        "php": ">=5.3.3",
-        "symfony/console": "~2",
-        "symfony/filesystem": "~2",
-        "symfony/finder": "~2"
+        "php": ">=5.6"
     },
     "autoload": {
         "psr-0": { "": "src/" }
-    },
-    "config": {
-        "bin-dir": "."
-    },
-    "bin": ["php-cg"]
+    }
 }

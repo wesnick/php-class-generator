@@ -1,39 +1,37 @@
 <?php
 /**
- * This software is licensed under MIT License
+ * This software is licensed under MIT License.
  *
  * Copyright (c) 2012, Kazuyuki Hayashi
  */
-
 namespace KzykHys\ClassGenerator\Compiler;
 
 /**
- * Help build a string
+ * Help build a string.
  *
  * @author Kazuyuki Hayashi <hayashi@valnur.net>
  */
 class StreamWriter
 {
-
     private $buffer;
     private $options;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $options Options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
-        $this->options = array_merge(array(
+        $this->options = array_merge([
             'indent_spaces' => '4',
-            'lineFeed' => "\n"
-        ), $options);
-        $this->lines = array();
+            'lineFeed'      => "\n",
+        ], $options);
+        $this->lines = [];
     }
 
     /**
-     * Writes a string
+     * Writes a string.
      *
      * @param string $str
      *
@@ -47,7 +45,7 @@ class StreamWriter
     }
 
     /**
-     * Writes a string with format
+     * Writes a string with format.
      *
      * @param string $str
      * @param mixed  $args ... {@see http://jp2.php.net/manual/en/function.sprintf.php}
@@ -67,7 +65,7 @@ class StreamWriter
     }
 
     /**
-     * Writes a line
+     * Writes a line.
      *
      * @param string $line
      *
@@ -75,16 +73,16 @@ class StreamWriter
      */
     public function writeLine($line = null)
     {
-        $this->write($line . $this->options['lineFeed']);
+        $this->write($line.$this->options['lineFeed']);
 
         return $this;
     }
 
     /**
-     * Writes a line with format
+     * Writes a line with format.
      *
-     * @param integer $line
-     * @param mixed   $args ... {@see      http://jp2.php.net/manual/en/function.sprintf.php}
+     * @param int   $line
+     * @param mixed $args ... {@see      http://jp2.php.net/manual/en/function.sprintf.php}
      *
      * @throws \OutOfBoundsException
      *
@@ -101,7 +99,7 @@ class StreamWriter
     }
 
     /**
-     * Inserts a indent
+     * Inserts a indent.
      *
      * @return StreamWriter
      */
@@ -113,11 +111,11 @@ class StreamWriter
     }
 
     /**
-     * Writes contents as a file
+     * Writes contents as a file.
      *
      * @param string $filename
      *
-     * @return integer|boolean Bytes written
+     * @return int|bool Bytes written
      */
     public function save($filename)
     {
@@ -125,7 +123,7 @@ class StreamWriter
     }
 
     /**
-     * Returns contents as a string
+     * Returns contents as a string.
      *
      * @return string
      */
@@ -133,5 +131,4 @@ class StreamWriter
     {
         return $this->buffer;
     }
-
 }

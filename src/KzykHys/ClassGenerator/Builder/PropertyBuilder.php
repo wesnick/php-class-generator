@@ -1,20 +1,18 @@
 <?php
 /**
- * This software is licensed under MIT License
+ * This software is licensed under MIT License.
  *
  * Copyright (c) 2012, Kazuyuki Hayashi
  */
-
 namespace KzykHys\ClassGenerator\Builder;
 
 /**
- * Represents a property
+ * Represents a property.
  *
  * @author Kazuyuki Hayashi <hayashi@valnur.net>
  */
 class PropertyBuilder
 {
-
     private $name;
     private $visibility;
     private $type;
@@ -23,23 +21,23 @@ class PropertyBuilder
     private $comments;
     private $default;
 
-    private $accessorDefaults = array(
-        'getter' => array('get', 'is'),
-        'setter' => array('set', 'bind')
-    );
+    private $accessorDefaults = [
+        'getter' => ['get', 'is'],
+        'setter' => ['set', 'bind'],
+    ];
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
-        $this->getters = array();
-        $this->setters = array();
-        $this->comments = array();
+        $this->getters  = [];
+        $this->setters  = [];
+        $this->comments = [];
     }
 
     /**
-     * Sets name
+     * Sets name.
      *
      * @param string $name
      */
@@ -49,7 +47,7 @@ class PropertyBuilder
     }
 
     /**
-     * Gets name
+     * Gets name.
      *
      * @return string
      */
@@ -59,7 +57,7 @@ class PropertyBuilder
     }
 
     /**
-     * Sets visibility
+     * Sets visibility.
      *
      * @param string $visibility
      */
@@ -69,7 +67,7 @@ class PropertyBuilder
     }
 
     /**
-     * Gets visibility
+     * Gets visibility.
      *
      * @return string
      */
@@ -79,7 +77,7 @@ class PropertyBuilder
     }
 
     /**
-     * Sets type
+     * Sets type.
      *
      * @param string $type
      */
@@ -89,7 +87,7 @@ class PropertyBuilder
     }
 
     /**
-     * Gets type
+     * Gets type.
      *
      * @return string
      */
@@ -99,7 +97,7 @@ class PropertyBuilder
     }
 
     /**
-     * Adds getter
+     * Adds getter.
      *
      * @param string $getter
      */
@@ -109,7 +107,7 @@ class PropertyBuilder
     }
 
     /**
-     * Adds setter
+     * Adds setter.
      *
      * @param string $setter
      */
@@ -119,7 +117,7 @@ class PropertyBuilder
     }
 
     /**
-     * Sets comments
+     * Sets comments.
      *
      * @param array $comments
      */
@@ -129,7 +127,7 @@ class PropertyBuilder
     }
 
     /**
-     * Gets comments
+     * Gets comments.
      *
      * @return array $comments
      */
@@ -139,7 +137,7 @@ class PropertyBuilder
     }
 
     /**
-     * Adds accessor
+     * Adds accessor.
      *
      * @param string $accessor
      *
@@ -154,11 +152,10 @@ class PropertyBuilder
         } else {
             throw new \InvalidArgumentException(sprintf('Unexpected property accessor "%s" available accessors are [get,is,bind,set]', $accessor));
         }
-
     }
 
     /**
-     * Sets Default Value for a Property
+     * Sets Default Value for a Property.
      *
      * @param string $default
      */
@@ -168,7 +165,7 @@ class PropertyBuilder
     }
 
     /**
-     * Gets Default Value for a Property
+     * Gets Default Value for a Property.
      *
      * @return string
      */
@@ -184,6 +181,4 @@ class PropertyBuilder
     {
         return array_merge($this->getters, $this->setters);
     }
-
-
 }
