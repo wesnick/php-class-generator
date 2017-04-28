@@ -15,24 +15,12 @@ class ClassBuilder
 {
     private $class;
     private $extends = null;
-    private $interfaces;
-    private $imports;
-    private $docblock;
-    private $constants;
-    private $properties;
-    private $methods;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->interfaces = [];
-        $this->imports    = [];
-        $this->constants  = [];
-        $this->properties = [];
-        $this->methods    = [];
-    }
+    private $interfaces = [];
+    private $imports = [];
+    private $docblock = [];
+    private $constants = [];
+    private $properties = [];
+    private $methods = [];
 
     /**
      * Sets class name.
@@ -54,7 +42,7 @@ class ClassBuilder
         return $this->class;
     }
 
-    public function setExtends($extends)
+    public function setExtends(array $extends)
     {
         $this->extends = $extends;
     }
@@ -74,7 +62,7 @@ class ClassBuilder
         return $this->interfaces;
     }
 
-    public function addImports($imports)
+    public function addImport($imports)
     {
         $this->imports[] = $imports;
     }
@@ -84,7 +72,7 @@ class ClassBuilder
         return array_unique($this->imports);
     }
 
-    public function setDocblock($docblock)
+    public function setDocblock(array $docblock)
     {
         $this->docblock = $docblock;
     }
@@ -123,7 +111,12 @@ class ClassBuilder
 
     public function addProperty(PropertyBuilder $builder)
     {
-        $this->properties[] = $builder;
+        $this->properties[$builder->getName()] = $builder;
+    }
+
+    public function hasProperty($name)
+    {
+        return array_key_exists($name, $this->properties);
     }
 
     public function getProperties()

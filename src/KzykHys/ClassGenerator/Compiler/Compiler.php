@@ -81,8 +81,11 @@ class Compiler
         if ($docblock) {
             $writer->writeLine('/**');
             foreach ($docblock as $docline) {
-                $docline = trim(ltrim($docline, '>'));
-                $writer->writeLine(' * '.$docline);
+                $dls = $this->wrapDescription($docline);
+
+                foreach ($dls as $dl) {
+                    $writer->writeLine(' * '.$dl);
+                }
             }
             $writer->writeLine(' */');
         }
@@ -156,8 +159,10 @@ class Compiler
             $comments = $property->getComments();
             if (count($comments)) {
                 foreach ($comments as $comment) {
-                    $comment = trim(ltrim($comment, '>'));
-                    $writer->indent()->write(' * ')->writeLine($comment);
+                    $cls = $this->wrapDescription($comment);
+                    foreach ($cls as $cl) {
+                        $writer->indent()->write(' * ')->writeLine($cl);
+                    }
                 }
                 $writer->indent()
                     ->write(' * ')
@@ -319,5 +324,11 @@ class Compiler
             'name' => $type,
             'hint' => $typeHintEnabled,
         ];
+    }
+
+    private function wrapDescription($docline)
+    {
+        $wrapped = wordwrap($docline, 100);
+        return explode("\n", $wrapped);
     }
 }

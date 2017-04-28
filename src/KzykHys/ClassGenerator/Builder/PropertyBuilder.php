@@ -121,9 +121,19 @@ class PropertyBuilder
      *
      * @param array $comments
      */
-    public function setComments($comments)
+    public function setComments(array $comments)
     {
         $this->comments = $comments;
+    }
+
+    /**
+     * Add comment.
+     *
+     * @param string $comment
+     */
+    public function addComment($comment)
+    {
+        $this->comments[] = $comment;
     }
 
     /**
