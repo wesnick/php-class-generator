@@ -1,9 +1,11 @@
 <?php
-/**
+
+/*
  * This software is licensed under MIT License.
  *
  * Copyright (c) 2012, Kazuyuki Hayashi
  */
+
 namespace KzykHys\ClassGenerator\Builder;
 
 /**
@@ -14,27 +16,17 @@ namespace KzykHys\ClassGenerator\Builder;
 class PropertyBuilder
 {
     private $name;
-    private $visibility;
+    private $visibility = 'public';
     private $type;
-    private $getters;
-    private $setters;
-    private $comments;
+    private $getters  = [];
+    private $setters  = [];
+    private $comments = [];
     private $default;
 
     private $accessorDefaults = [
         'getter' => ['get', 'is'],
-        'setter' => ['set', 'bind'],
+        'setter' => ['set'],
     ];
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->getters  = [];
-        $this->setters  = [];
-        $this->comments = [];
-    }
 
     /**
      * Sets name.
@@ -155,9 +147,9 @@ class PropertyBuilder
      */
     public function addAccessor($accessor)
     {
-        if (in_array($accessor, $this->accessorDefaults['getter'])) {
+        if (in_array($accessor, $this->accessorDefaults['getter'], true)) {
             $this->addGetter($accessor);
-        } elseif (in_array($accessor, $this->accessorDefaults['setter'])) {
+        } elseif (in_array($accessor, $this->accessorDefaults['setter'], true)) {
             $this->addSetter($accessor);
         } else {
             throw new \InvalidArgumentException(sprintf('Unexpected property accessor "%s" available accessors are [get,is,bind,set]', $accessor));

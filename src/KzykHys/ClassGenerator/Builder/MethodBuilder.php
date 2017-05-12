@@ -1,9 +1,11 @@
 <?php
-/**
+
+/*
  * This software is licensed under MIT License.
  *
  * Copyright (c) 2012, Kazuyuki Hayashi
  */
+
 namespace KzykHys\ClassGenerator\Builder;
 
 /**
@@ -14,19 +16,11 @@ namespace KzykHys\ClassGenerator\Builder;
 class MethodBuilder
 {
     private $name;
-    private $visibility;
+    private $visibility = 'public';
     private $type;
-    private $arguments;
+    private $arguments = [];
     private $comments;
     private $body;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->arguments = [];
-    }
 
     /**
      * Sets name.

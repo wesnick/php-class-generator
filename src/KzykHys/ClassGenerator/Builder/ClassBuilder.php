@@ -1,9 +1,11 @@
 <?php
-/**
+
+/*
  * This software is licensed under MIT License.
  *
  * Copyright (c) 2012, Kazuyuki Hayashi
  */
+
 namespace KzykHys\ClassGenerator\Builder;
 
 /**
@@ -14,13 +16,19 @@ namespace KzykHys\ClassGenerator\Builder;
 class ClassBuilder
 {
     private $class;
-    private $extends = null;
+    private $extends    = null;
     private $interfaces = [];
-    private $imports = [];
-    private $docblock = [];
-    private $constants = [];
+    private $imports    = [];
+    private $docblock   = [];
+    private $constants  = [];
+    /**
+     * @var PropertyBuilder[]
+     */
     private $properties = [];
-    private $methods = [];
+    /**
+     * @var MethodBuilder[]
+     */
+    private $methods    = [];
 
     /**
      * Sets class name.
@@ -42,7 +50,7 @@ class ClassBuilder
         return $this->class;
     }
 
-    public function setExtends(array $extends)
+    public function setExtends($extends)
     {
         $this->extends = $extends;
     }
@@ -132,7 +140,6 @@ class ClassBuilder
     public function getMethods()
     {
         // Add property getters and setters
-        /** @var $property PropertyBuilder */
         foreach ($this->properties as $property) {
             foreach ($property->getAccessors() as $access) {
                 $methodBuilder = new MethodBuilder();
@@ -151,7 +158,8 @@ class ClassBuilder
                     $setter     = sprintf('$this->%s = $%s;', $property->getName(), $property->getName());
                     $setterBody = <<<EOF
 $setter
-        return \$this;
+
+return \$this;
 EOF;
                     $methodBuilder->setBody($setterBody);
                     $methodBuilder->setType($this->getClass());

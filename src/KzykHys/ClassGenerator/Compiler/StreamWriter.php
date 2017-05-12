@@ -1,9 +1,11 @@
 <?php
-/**
+
+/*
  * This software is licensed under MIT License.
  *
  * Copyright (c) 2012, Kazuyuki Hayashi
  */
+
 namespace KzykHys\ClassGenerator\Compiler;
 
 /**
@@ -28,6 +30,16 @@ class StreamWriter
             'lineFeed'      => "\n",
         ], $options);
         $this->lines = [];
+    }
+
+    /**
+     * Returns contents as a string.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->buffer;
     }
 
     /**
@@ -120,15 +132,5 @@ class StreamWriter
     public function save($filename)
     {
         return file_put_contents($filename, $this->buffer);
-    }
-
-    /**
-     * Returns contents as a string.
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->buffer;
     }
 }
