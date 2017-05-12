@@ -1,10 +1,7 @@
 PHP Class Generator 
 ===================
 
-Generate PSR compliant classes with a fluent builder interface
-
-Requirements
-------------
+Generate PSR compliant classes with a builder interface
 
 Requirements
 ------------
